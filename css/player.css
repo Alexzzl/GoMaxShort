@@ -1,0 +1,218 @@
+/* ===== 播放页样式 Player CSS ===== */
+
+#player-page {
+    padding-top: 0;
+    background: #000;
+}
+
+.player-layout {
+    display: flex;
+    height: 100vh;
+}
+
+/* ===== 播放器主区域 ===== */
+.player-main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    background: #000;
+    position: relative;
+}
+
+.video-player {
+    flex: 1;
+    width: 100%;
+    background: #000;
+    object-fit: contain;
+}
+
+/* 自定义播放器控制栏 */
+.player-controls {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 24px;
+    background: linear-gradient(transparent, rgba(0, 0, 0, 0.9));
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.player-main:hover .player-controls,
+.player-controls.show {
+    opacity: 1;
+}
+
+.controls-left,
+.controls-right {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.controls-center {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+}
+
+.current-episode {
+    font-size: var(--font-size-md);
+    font-weight: 600;
+    color: var(--primary-color);
+}
+
+.episode-title {
+    font-size: var(--font-size-sm);
+    color: var(--text-secondary);
+}
+
+.control-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 10px 16px;
+    background: rgba(255, 255, 255, 0.1);
+    border: none;
+    border-radius: 6px;
+    color: var(--text-primary);
+    font-size: var(--font-size-sm);
+    cursor: pointer;
+    transition: var(--transition-fast);
+}
+
+.control-btn:hover,
+.control-btn.focused {
+    background: rgba(255, 255, 255, 0.2);
+    transform: scale(1.05);
+}
+
+.control-btn.play-pause {
+    width: 48px;
+    height: 48px;
+    padding: 0;
+    justify-content: center;
+    border-radius: 50%;
+    font-size: 20px;
+    background: var(--primary-color);
+}
+
+.control-btn.play-pause:hover,
+.control-btn.play-pause.focused {
+    background: #FF6B2E;
+}
+
+/* ===== 播放列表侧边栏 ===== */
+.player-sidebar {
+    width: 380px;
+    min-width: 380px;
+    background: var(--bg-card);
+    border-left: 1px solid var(--border-color);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.player-sidebar .sidebar-title {
+    padding: 24px;
+    border-bottom: 1px solid var(--border-color);
+    margin-bottom: 0;
+}
+
+.player-episodes {
+    flex: 1;
+    overflow-y: auto;
+    list-style: none;
+    padding: 16px;
+}
+
+.player-episode-item {
+    display: flex;
+    gap: 12px;
+    padding: 12px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: var(--transition-fast);
+    border: 2px solid transparent;
+    margin-bottom: 8px;
+}
+
+.player-episode-item:hover,
+.player-episode-item.focused {
+    background: var(--bg-hover);
+    border-color: var(--primary-color);
+}
+
+.player-episode-item.active {
+    background: rgba(239, 73, 2, 0.15);
+    border-color: var(--primary-color);
+}
+
+.player-episode-item .episode-thumb {
+    width: 120px;
+    min-width: 120px;
+}
+
+.player-episode-item .episode-info {
+    justify-content: center;
+}
+
+.player-episode-item .episode-number {
+    font-size: 12px;
+}
+
+.player-episode-item .episode-title {
+    font-size: 13px;
+    margin-bottom: 4px;
+}
+
+/* 响应式 */
+@media (max-width: 1280px) {
+    .player-sidebar {
+        width: 320px;
+        min-width: 320px;
+    }
+
+    .player-episode-item .episode-thumb {
+        width: 100px;
+        min-width: 100px;
+    }
+}
+
+@media (max-width: 1024px) {
+    .player-layout {
+        flex-direction: column;
+    }
+
+    .player-sidebar {
+        width: 100%;
+        min-width: 100%;
+        height: 250px;
+        border-left: none;
+        border-top: 1px solid var(--border-color);
+    }
+
+    .player-episodes {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+    }
+
+    .player-episode-item {
+        width: calc(50% - 4px);
+        margin-bottom: 0;
+    }
+}
+
+/* TV遥控器优化的焦点样式 */
+.player-sidebar .player-episode-item.focused {
+    transform: scale(1.02);
+}
+
+.player-controls .control-btn.focused {
+    box-shadow: 0 0 0 3px rgba(239, 73, 2, 0.5);
+}

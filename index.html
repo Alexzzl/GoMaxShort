@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="format-detection" content="telephone=no">
+    <title>GoMax Short</title>
+    <link rel="stylesheet" href="css/common.css">
+    <link rel="stylesheet" href="css/home.css">
+    <link rel="stylesheet" href="css/discover.css">
+    <link rel="stylesheet" href="css/detail.css">
+    <link rel="stylesheet" href="css/player.css">
+</head>
+<body>
+    <!-- Loading页面 -->
+    <div id="loading-page" class="page active">
+        <div class="loading-content">
+            <div class="logo-container">
+                <div class="logo-icon">
+                    <div class="play-icon"></div>
+                </div>
+            </div>
+            <h1 class="app-title">GoMax Short</h1>
+        </div>
+    </div>
+
+    <!-- 主容器 -->
+    <div id="app" class="app-container">
+        <!-- 顶部导航 -->
+        <nav id="main-nav" class="main-nav">
+            <div class="nav-logo">
+                <img src="assets/CodeBubbyAssets/3052_414/1.svg" alt="GoMax" style="width: 40px; height: 40px;">
+                <span class="logo-text">GoMax Short</span>
+            </div>
+            <ul class="nav-menu">
+                <li class="nav-item active" data-page="home" data-focusable="true">
+                    <span class="nav-text">Home</span>
+                </li>
+                <li class="nav-item" data-page="discover" data-focusable="true">
+                    <span class="nav-text">Discover</span>
+                </li>
+                <li class="nav-item" data-page="history" data-focusable="true">
+                    <span class="nav-text">My List</span>
+                </li>
+                <li class="nav-item" data-page="settings" data-focusable="true">
+                    <span class="nav-text">Categories</span>
+                </li>
+            </ul>
+        </nav>
+
+        <!-- 页面容器 -->
+        <main id="page-container" class="page-container">
+            <!-- 首页 -->
+            <div id="home-page" class="page">
+                <!-- 轮播推荐 -->
+                <section class="hero-section">
+                    <div class="hero-slider" id="hero-slider">
+                        <!-- 轮播项动态生成 -->
+                    </div>
+                </section>
+
+                <!-- Featured Series -->
+                <section class="popular-section">
+                    <h2 class="section-title">Featured Series</h2>
+                    <div class="drama-grid" id="popular-dramas">
+                        <!-- 剧集项动态生成 -->
+                    </div>
+                </section>
+            </div>
+
+            <!-- 发现页 -->
+            <div id="discover-page" class="page">
+                <div class="discover-layout">
+                    <!-- 左侧分类侧边栏 -->
+                    <aside class="discover-sidebar">
+                        <h2 class="sidebar-title">Categories</h2>
+                        <ul class="category-list" id="category-list">
+                            <li class="category-item active" data-category="all" data-focusable="true">
+                                <span>All</span>
+                            </li>
+                            <li class="category-item" data-category="romance" data-focusable="true">
+                                <span>Romance</span>
+                            </li>
+                            <li class="category-item" data-category="drama" data-focusable="true">
+                                <span>Drama</span>
+                            </li>
+                            <li class="category-item" data-category="comedy" data-focusable="true">
+                                <span>Comedy</span>
+                            </li>
+                            <li class="category-item" data-category="action" data-focusable="true">
+                                <span>Action</span>
+                            </li>
+                            <li class="category-item" data-category="thriller" data-focusable="true">
+                                <span>Thriller</span>
+                            </li>
+                            <li class="category-item" data-category="sci-fi" data-focusable="true">
+                                <span>Sci-Fi</span>
+                            </li>
+                        </ul>
+                    </aside>
+
+                    <!-- 右侧内容区 -->
+                    <div class="discover-content">
+                        <div class="content-header">
+                            <h2 class="content-title" id="category-title">All Dramas</h2>
+                            <div class="sort-options">
+                                <button class="sort-btn active" data-sort="popular" data-focusable="true">Popular</button>
+                                <button class="sort-btn" data-sort="latest" data-focusable="true">Latest</button>
+                                <button class="sort-btn" data-sort="rating" data-focusable="true">Rating</button>
+                            </div>
+                        </div>
+                        <div class="drama-grid" id="discover-dramas">
+                            <!-- 剧集项动态生成 -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 剧集详情页 -->
+            <div id="detail-page" class="page">
+                <div class="detail-layout">
+                    <!-- 背景大图 -->
+                    <div class="detail-backdrop" id="detail-backdrop"></div>
+                    <div class="detail-overlay"></div>
+
+                    <!-- 主要信息 -->
+                    <div class="detail-main">
+                        <div class="detail-poster" id="detail-poster"></div>
+                        <div class="detail-info">
+                            <h1 class="detail-title" id="detail-title">Drama Title</h1>
+                            <div class="detail-meta">
+                                <span class="meta-item" id="detail-year">2024</span>
+                                <span class="meta-item" id="detail-episodes">12 Episodes</span>
+                                <span class="meta-item" id="detail-rating">★ 9.2</span>
+                                <span class="meta-item" id="detail-category">Romance</span>
+                            </div>
+                            <p class="detail-desc" id="detail-desc">Drama description...</p>
+                            <div class="detail-actions">
+                                <button class="action-btn primary" id="play-btn" data-focusable="true">
+                                    <span class="btn-icon">▶</span>
+                                    <span class="btn-text">Play</span>
+                                </button>
+                                <button class="action-btn" id="favorite-btn" data-focusable="true">
+                                    <span class="btn-icon">♡</span>
+                                    <span class="btn-text">Favorite</span>
+                                </button>
+                                <button class="action-btn" id="share-btn" data-focusable="true">
+                                    <span class="btn-icon">↗</span>
+                                    <span class="btn-text">Share</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 剧集列表 -->
+                    <section class="episodes-section">
+                        <h2 class="section-title">Episodes</h2>
+                        <div class="episodes-grid" id="episodes-grid">
+                            <!-- 剧集项动态生成 -->
+                        </div>
+                    </section>
+
+                    <!-- 相关推荐 -->
+                    <section class="related-section">
+                        <h2 class="section-title">Related Dramas</h2>
+                        <div class="drama-grid" id="related-dramas">
+                            <!-- 相关剧集动态生成 -->
+                        </div>
+                    </section>
+                </div>
+            </div>
+
+            <!-- 播放页 -->
+            <div id="player-page" class="page">
+                <div class="player-layout">
+                    <!-- 视频播放器 -->
+                    <div class="player-main">
+                        <video id="video-player" class="video-player" controls>
+                            <source src="" type="application/x-mpegURL">
+                        </video>
+
+                        <!-- 播放控制栏 -->
+                        <div class="player-controls">
+                            <div class="controls-left">
+                                <button class="control-btn" id="prev-episode" data-focusable="true">⏮ Prev</button>
+                                <button class="control-btn play-pause" id="play-pause">▶</button>
+                                <button class="control-btn" id="next-episode" data-focusable="true">Next ⏭</button>
+                            </div>
+                            <div class="controls-center">
+                                <span class="current-episode" id="current-episode">Ep 1</span>
+                                <span class="episode-title" id="episode-title">Episode Title</span>
+                            </div>
+                            <div class="controls-right">
+                                <button class="control-btn" id="rewind-btn" data-focusable="true">-10s</button>
+                                <button class="control-btn" id="forward-btn" data-focusable="true">+10s</button>
+                                <button class="control-btn" id="volume-btn">🔊</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 播放列表 -->
+                    <aside class="player-sidebar">
+                        <h2 class="sidebar-title">Episodes</h2>
+                        <ul class="player-episodes" id="player-episodes">
+                            <!-- 剧集列表动态生成 -->
+                        </ul>
+                    </aside>
+                </div>
+            </div>
+
+            <!-- 历史记录页 -->
+            <div id="history-page" class="page">
+                <div class="history-layout">
+                    <h2 class="page-title">Watch History</h2>
+                    <div class="drama-grid" id="history-dramas">
+                        <!-- 历史记录动态生成 -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- 设置页 -->
+            <div id="settings-page" class="page">
+                <div class="settings-layout">
+                    <h2 class="page-title">Settings</h2>
+                    <div class="settings-list">
+                        <div class="setting-item" data-focusable="true">
+                            <span class="setting-label">Video Quality</span>
+                            <span class="setting-value">Auto</span>
+                        </div>
+                        <div class="setting-item" data-focusable="true">
+                            <span class="setting-label">Auto Play Next</span>
+                            <span class="setting-value">On</span>
+                        </div>
+                        <div class="setting-item" data-focusable="true">
+                            <span class="setting-label">Notifications</span>
+                            <span class="setting-value">On</span>
+                        </div>
+                        <div class="setting-item" data-focusable="true">
+                            <span class="setting-label">Language</span>
+                            <span class="setting-value">English</span>
+                        </div>
+                        <div class="setting-item" data-focusable="true">
+                            <span class="setting-label">About</span>
+                            <span class="setting-value">v1.0.0</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- Footer -->
+        <footer class="app-footer">
+            <div class="footer-content">
+                <p>GoMax Short - Free Short Drama Series, Anytime, Anywhere!</p>
+                <p>Use arrow keys to navigate and OK/Enter to select</p>
+            </div>
+        </footer>
+    </div>
+
+    <script src="js/data/mock.js"></script>
+    <script src="js/remote.js"></script>
+    <script src="js/router.js"></script>
+    <script src="js/pages/home.js"></script>
+    <script src="js/pages/discover.js"></script>
+    <script src="js/pages/detail.js"></script>
+    <script src="js/pages/player.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>

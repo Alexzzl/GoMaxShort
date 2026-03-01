@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<widget xmlns="http://www.w3.org/ns/widgets"
+        xmlns:tizen="http://tizen.org/ns/widgets"
+        id="http://gomax.com/GoMaxShort"
+        version="1.0.0"
+        viewmodes="maximized">
+
+    <tizen:application id="com.gomax.short"
+                       package="com.gomax.short"
+                       required_version="4.0"/>
+
+    <name>GoMax Short</name>
+    <description>海外精品短剧平台 - GoMax Short</description>
+    <author>GoMax</author>
+    <content src="index.html"/>
+
+    <!-- 图标设置 -->
+    <icon src="assets/icon.png"/>
+    <tizen:icon src="assets/icon-80.png" width="80" height="80"/>
+    <tizen:icon src="assets/icon-130.png" width="130" height="130"/>
+
+    <!-- 权限配置 -->
+    <tizen:privilege name="http://tizen.org/privilege/tv.inputdevice"/>
+    <tizen:privilege name="http://tizen.org/privilege/internet"/>
+    <tizen:privilege name="http://tizen.org/privilege/application.launch"/>
+
+    <!-- TV配置 -->
+    <tizen:profile name="tv"/>
+    <tizen:setting screen-orientation="landscape"
+                  context-menu="enable"
+                  background-support="disable"
+                  encryption="disable"
+                  install-location="auto"/>
+
+    <!-- 分辨率支持 -->
+    <tizen:feature name="http://tizen.org/feature/screen.size.all"/>
+    <tizen:feature name="http://tizen.org/feature/screen.size.1920.1080"/>
+    <tizen:feature name="http://tizen.org/feature/screen.size.1280.720"/>
+    <tizen:feature name="http://tizen.org/feature/network.wifi"/>
+
+    <!-- 元数据 -->
+    <tizen:metadata key="age_rating" value="12"/>
+    <tizen:metadata key="provider" value="GoMax"/>
+    <tizen:metadata key="preferred-language" value="en-US"/>
+
+    <!-- 分类 -->
+    <tizen:category name="http://tizen.org/category/media"/>
+    <tizen:category name="http://tizen.org/category/video"/>
+
+</widget>

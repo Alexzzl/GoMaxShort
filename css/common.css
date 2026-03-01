@@ -1,0 +1,422 @@
+/* ===== 公共样式 Common CSS ===== */
+
+/* CSS变量 */
+:root {
+    /* 颜色 - Figma设计色值 */
+    --primary-color: #F48739;
+    --primary-gradient: linear-gradient(180deg, #F48739 0%, #BFFF98 100%);
+    --bg-dark: #121212;
+    --bg-card: #1E1E1E;
+    --bg-hover: #2A2A2A;
+    --text-primary: #FFFFFF;
+    --text-secondary: #B0B0B0;
+    --text-muted: #707070;
+    --border-color: #333333;
+    --focus-border: #90E48F;
+    --success: #90E48F;
+    --error: #F44336;
+
+    /* 尺寸 */
+    --nav-height: 110px;
+    --sidebar-width: 280px;
+    --card-gap: 24px;
+    --border-radius: 12px;
+    --border-radius-lg: 20px;
+
+    /* 字体 */
+    --font-family: 'Segoe UI', sans-serif;
+    --font-size-xs: 14px;
+    --font-size-sm: 16px;
+    --font-size-md: 20px;
+    --font-size-lg: 28px;
+    --font-size-xl: 36px;
+    --font-size-xxl: 48px;
+
+    /* 动画 */
+    --transition-fast: 0.15s ease;
+    --transition-normal: 0.3s ease;
+    --transition-slow: 0.5s ease;
+}
+
+/* 重置样式 */
+*, *::before, *::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    font-family: var(--font-family);
+    font-size: var(--font-size-md);
+    color: var(--text-primary);
+    background-color: var(--bg-dark);
+    line-height: 1.5;
+}
+
+/* 滚动条样式 */
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--bg-dark);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--border-color);
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--text-muted);
+}
+
+/* ===== 应用容器 ===== */
+.app-container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100vh;
+    background-color: var(--bg-dark);
+}
+
+/* ===== 页面管理 ===== */
+.page {
+    display: none;
+    width: 100%;
+    height: calc(100vh - var(--nav-height) - 40px);
+    overflow-y: auto;
+    overflow-x: hidden;
+    margin-top: 20px;
+}
+
+.page.active {
+    display: block;
+}
+
+.page-container {
+    width: 100%;
+    background: var(--bg-dark);
+}
+
+/* ===== 顶部导航 ===== */
+.main-nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 1800px;
+    height: 70px;
+    margin: 40px 60px 0;
+    padding: 0;
+    border-bottom: 2px solid rgba(255, 255, 255, 0.10);
+    background: transparent;
+    position: relative;
+    z-index: 1000;
+}
+
+.nav-logo {
+    display: flex;
+    align-items: center;
+}
+
+.nav-logo svg {
+    width: 40px;
+    height: 40px;
+}
+
+.logo-text {
+    font-size: 36px;
+    font-weight: 700;
+    background: var(--primary-color);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.nav-menu {
+    display: flex;
+    list-style: none;
+    gap: 0;
+}
+
+.nav-item {
+    display: flex;
+    align-items: center;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 6px;
+    transition: var(--transition-fast);
+}
+
+.nav-item.active {
+    background: rgba(244, 135, 57, 0.1);
+    outline: 4px solid #90E48F;
+    outline-offset: -4px;
+    border-radius: 16px;
+}
+
+.nav-item.active .nav-text {
+    color: var(--primary-color);
+    font-weight: 400;
+}
+
+.nav-item:hover,
+.nav-item.focused {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.nav-text {
+    font-size: 20px;
+    color: var(--text-secondary);
+}
+
+.nav-search {
+    display: none;
+}
+
+/* ===== 焦点系统 ===== */
+[data-focusable="true"] {
+    outline: none;
+    transition: var(--transition-fast);
+}
+
+[data-focusable="true"]:focus,
+[data-focusable="true"].focused {
+    transform: scale(1.05);
+    box-shadow: 0 0 0 4px rgba(239, 73, 2, 0.4);
+}
+
+/* ===== 通用按钮 ===== */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 14px 28px;
+    background: var(--bg-card);
+    border: 2px solid transparent;
+    border-radius: var(--border-radius);
+    color: var(--text-primary);
+    font-size: var(--font-size-sm);
+    font-weight: 500;
+    cursor: pointer;
+    transition: var(--transition-fast);
+}
+
+.btn:focus,
+.btn.focused {
+    border-color: var(--focus-border);
+    transform: scale(1.05);
+}
+
+.btn-primary {
+    background: var(--primary-color);
+    border-color: var(--primary-color);
+}
+
+.btn-primary:hover,
+.btn-primary.focused {
+    background: #FF6B2E;
+}
+
+/* ===== 通用卡片 ===== */
+.card {
+    background: var(--bg-card);
+    border-radius: var(--border-radius-lg);
+    overflow: hidden;
+    cursor: pointer;
+    transition: var(--transition-normal);
+}
+
+.card:hover,
+.card.focused {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+}
+
+.card-image {
+    width: 100%;
+    aspect-ratio: 2/3;
+    object-fit: cover;
+    background: var(--bg-hover);
+}
+
+.card-content {
+    padding: 16px;
+}
+
+.card-title {
+    font-size: var(--font-size-sm);
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 8px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.card-meta {
+    font-size: var(--font-size-xs);
+    color: var(--text-muted);
+}
+
+/* ===== 剧集网格 ===== */
+.drama-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: var(--card-gap);
+}
+
+/* ===== 区块标题 ===== */
+.section-title {
+    font-size: 32px;
+    font-weight: 700;
+    color: #F48739;
+    margin-bottom: 24px;
+    padding-left: 0;
+    border-left: none;
+}
+
+.page-title {
+    font-size: var(--font-size-xxl);
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 32px;
+}
+
+/* ===== Footer ===== */
+.app-footer {
+    width: 100%;
+    height: 128px;
+    margin-top: auto;
+    border-top: 2px solid rgba(255, 255, 255, 0.10);
+    background: var(--bg-dark);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.footer-content {
+    text-align: center;
+}
+
+.footer-content p {
+    font-size: 16px;
+    color: var(--text-secondary);
+    margin: 4px 0;
+}
+
+/* ===== Loading页面 ===== */
+#loading-page {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--bg-dark);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+    transition: opacity 0.5s ease;
+}
+
+#loading-page.hidden {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.loading-content {
+    text-align: center;
+}
+
+.logo-container {
+    margin-bottom: 32px;
+}
+
+.logo-icon {
+    width: 160px;
+    height: 160px;
+    background: var(--bg-card);
+    border-radius: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+}
+
+.play-icon {
+    width: 80px;
+    height: 80px;
+    background: var(--primary-gradient);
+    border-radius: 50%;
+    position: relative;
+}
+
+.play-icon::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 55%;
+    transform: translate(-50%, -50%);
+    border-left: 30px solid white;
+    border-top: 18px solid transparent;
+    border-bottom: 18px solid transparent;
+}
+
+.app-title {
+    font-size: var(--font-size-xxl);
+    font-weight: 700;
+    background: var(--primary-gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    letter-spacing: 4px;
+}
+
+/* ===== 响应式适配 ===== */
+@media (max-width: 1280px) {
+    :root {
+        --font-size-xl: 32px;
+        --font-size-lg: 24px;
+        --font-size-md: 18px;
+    }
+
+    .drama-grid {
+        grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    }
+}
+
+@media (max-width: 1024px) {
+    .main-nav {
+        padding: 0 24px;
+    }
+
+    .nav-menu {
+        gap: 4px;
+    }
+
+    .nav-item {
+        padding: 8px 16px;
+    }
+
+    .nav-search input {
+        width: 180px;
+    }
+}
+
+/* Samsung TV 16:9 适配 */
+@media (min-width: 1920px) {
+    :root {
+        --font-size-xs: 16px;
+        --font-size-sm: 18px;
+        --font-size-md: 22px;
+        --font-size-lg: 32px;
+        --font-size-xl: 42px;
+        --font-size-xxl: 56px;
+    }
+}
