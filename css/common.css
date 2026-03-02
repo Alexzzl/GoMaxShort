@@ -22,6 +22,7 @@
     --card-gap: 24px;
     --border-radius: 12px;
     --border-radius-lg: 20px;
+    --header-height: 80px;
 
     /* 字体 */
     --font-family: 'Segoe UI', sans-serif;
@@ -39,7 +40,9 @@
 }
 
 /* 重置样式 */
-*, *::before, *::after {
+*,
+*::before,
+*::after {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -93,19 +96,27 @@ body {
 /* ===== 页面管理 ===== */
 .page {
     display: none;
+    flex: 1;
     width: 100%;
-    height: calc(100vh - var(--nav-height) - 40px);
     overflow-y: auto;
     overflow-x: hidden;
-    margin-top: 20px;
 }
 
 .page.active {
-    display: block;
+    display: flex;
+    /* Use flex for active page */
+    flex-direction: column;
+    /* Ensure vertical layout */
 }
 
 .page-container {
+    flex: 1;
+    /* Allow container to grow */
+    display: flex;
+    /* Manage pages with flex */
     width: 100%;
+    padding-top: calc(var(--header-height) + 40px);
+    /* 80px header + 40px gap */
     background: var(--bg-dark);
 }
 
@@ -114,13 +125,14 @@ body {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    width: 1800px;
-    height: 70px;
-    margin: 40px 60px 0;
-    padding: 0;
-    border-bottom: 2px solid rgba(255, 255, 255, 0.10);
-    background: transparent;
-    position: relative;
+    height: var(--header-height);
+    padding: 0 60px;
+    background: var(--bg-dark);
+    border-bottom: 1px solid var(--border-color);
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
     z-index: 1000;
 }
 
