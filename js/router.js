@@ -1,0 +1,183 @@
+/**
+ * 路由管理 - Router Module
+ * 页面导航管理
+ */
+
+const Router = {
+    // 当前页面
+    currentPage: 'home',
+
+    // 页面堆栈
+    pageStack: [],
+
+    // 初始化
+    init() {
+        this.bindNavigationEvents();
+        this.navigateTo('home');
+    },
+
+    // 绑定导航事件
+    bindNavigationEvents() {
+        // 导航菜单点击
+        const navItems = document.querySelectorAll('.nav-item[data-page]');
+        navItems.forEach(item => {
+            item.addEventListener('click', () => {
+                const page = item.dataset.page;
+                this.navigateTo(page, {}, item);
+            });
+        });
+
+        // 遥控器返回事件
+        document.addEventListener('remote-back', () => {
+            this.goBack();
+        });
+
+        // 页面通用返回按钮
+        const backBtn = document.getElementById('page-header-back-btn');
+        backBtn.addEventListener('click', () => {
+            this.goBack();
+        });
+    },
+
+    // 导航到指定页面
+    navigateTo(page, params = {}, newFocus = null, isGoingBack = false) {
+        // 如果当前是播放页，则暂停视频
+        if (this.currentPage === 'player') {
+            const videoPlayer = document.getElementById('video-player');
+            if (videoPlayer && !videoPlayer.paused) {
+                videoPlayer.pause();
+            }
+        }
+
+        // 切换页眉可见性
+        this.updateHeaderVisibility(page, params);
+
+        // 保存当前页面到堆栈
+        if (!isGoingBack && this.currentPage !== page) {
+            this.pageStack.push({
+                page: this.currentPage,
+                params: this.getCurrentParams()
+            });
+            if (this.pageStack.length > 10) {
+                this.pageStack.shift();
+            }
+        }
+
+        // 隐藏所有页面
+        document.querySelectorAll('.page').forEach(p => {
+            p.classList.remove('active');
+        });
+
+        // 显示目标页面
+        const targetPage = document.getElementById(`${page}-page`);
+        if (targetPage) {
+            targetPage.classList.add('active');
+        }
+
+        // 更新导航状态
+        this.updateNavState(page);
+
+        // 设置当前页面
+        this.currentPage = page;
+
+        // 保存参数
+        this.currentParams = params;
+
+        // 重置遥控器焦点
+        if (window.Remote) {
+            if (newFocus) {
+                Remote.setFocus(newFocus);
+            } else {
+                Remote.resetForPage(page);
+            }
+        }
+
+        // 根据页面初始化不同的模块
+        switch (page) {
+            case 'home':
+                HomePage.init();
+                break;
+            case 'discover':
+                DiscoverPage.init();
+                break;
+            case 'detail':
+                DetailPage.init(params.dramaId);
+                break;
+            case 'player':
+                PlayerPage.init(params.dramaId, params.episodeId);
+                break;
+            case 'settings':
+                SettingsPage.init();
+                break;
+        }
+
+        // 触发页面切换事件
+        document.dispatchEvent(new CustomEvent('page-change', {
+            detail: { page, params }
+        }));
+    },
+
+    // 返回上一页
+    goBack() {
+        if (this.pageStack.length > 0) {
+            const last = this.pageStack.pop();
+            this.navigateTo(last.page, last.params, null, true);
+        }
+    },
+
+    // 更新导航状态
+    updateNavState(activePage) {
+        const navItems = document.querySelectorAll('.nav-item');
+        navItems.forEach(item => {
+            if (item.dataset.page === activePage) {
+                item.classList.add('active');
+            } else {
+                item.classList.remove('active');
+            }
+        });
+    },
+
+    // 获取当前参数
+    getCurrentParams() {
+        return this.currentParams || {};
+    },
+
+    // 获取当前页面
+    getCurrentPage() {
+        return this.currentPage;
+    },
+
+    // 更新页眉可见性
+    updateHeaderVisibility(page, params) {
+        const mainNav = document.getElementById('main-nav');
+        const pageHeader = document.getElementById('page-header');
+        const pageHeaderLogo = document.getElementById('page-header-logo');
+        const playerHeaderInfo = document.getElementById('page-header-player-info');
+        const playerHeaderTitle = document.getElementById('player-header-title');
+        const playerHeaderEpisode = document.getElementById('player-header-episode-info');
+
+        if (page === 'detail' || page === 'player') {
+            mainNav.style.display = 'none';
+            pageHeader.style.display = 'flex';
+
+            if (page === 'detail') {
+                pageHeaderLogo.style.display = 'flex';
+                playerHeaderInfo.style.display = 'none';
+            } else { // player page
+                pageHeaderLogo.style.display = 'none';
+                playerHeaderInfo.style.display = 'block';
+                // 更新播放页页眉信息 (需要从 params 获取)
+                if (params && params.title) {
+                    playerHeaderTitle.textContent = params.title;
+                    playerHeaderEpisode.textContent = `Episode ${params.episode || 1}`;
+                }
+            }
+        } else {
+            mainNav.style.display = 'flex';
+            pageHeader.style.display = 'none';
+        }
+    }
+};
+
+// 导出模块
+window.Router = Router;
