@@ -291,7 +291,7 @@ async function main() {
       cdp,
       `
         (() => {
-          const playBtn = document.querySelector('#detail-page .action-btn.primary');
+          const playBtn = document.querySelector('.action-btn.primary');
           if (!playBtn) {
             throw new Error('Play button not found on the detail page.');
           }
@@ -303,11 +303,10 @@ async function main() {
     await waitForCondition(
       cdp,
       `
-        location.hash.startsWith('#player')
-        && document.getElementById('player-page')?.classList.contains('active')
-        && document.getElementById('video-player')
-      `
-    );
+        location.hash.startsWith('#player') &&
+        document.getElementById('player-page')?.classList.contains('active')
+      `, 15000);
+    await delay(1000);
     await delay(1200);
 
     const playerSize = await captureCurrentView(cdp, path.join(OUTPUT_DIR, '06-player-page.jpg'));
