@@ -139,8 +139,8 @@ def main() -> None:
         [
             (SCREENSHOT_DIR / "01-home-hero.jpg", "1. Home screen"),
             (SCREENSHOT_DIR / "02-home-featured.jpg", "2. Featured content"),
-            (UI_DIR / "05-detail-page.jpg", "3. Detail screen"),
-            (UI_DIR / "06-player-page.jpg", "4. Player screen"),
+            (SCREENSHOT_DIR / "03-discover-top.jpg", "3. Discover page"),
+            (SCREENSHOT_DIR / "04-discover-categories.jpg", "4. Category browsing"),
         ],
         usage_collage,
         f"{APP_NAME} - Usage Scenario",
