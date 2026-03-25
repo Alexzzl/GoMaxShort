@@ -1,0 +1,19 @@
+:root {
+  --header-height: 88px;
+  --space-lg: 32px;
+  --space-md: 16px;
+  --space-sm: 8px;
+  --border-radius-md: 12px;
+  --text-bright: #ffffff;
+}
+
+#root {
+  width: 100%;
+  height: 100%;
+}
+
+button,
+input,
+textarea {
+  font: inherit;
+}
